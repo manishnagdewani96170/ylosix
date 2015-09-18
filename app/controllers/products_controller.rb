@@ -4,6 +4,9 @@ class ProductsController < Frontend::CommonController
   before_action :set_product
 
   def show
+    if !@product.present?
+      not_found
+    end
   end
 
   def get_template_variables(template)

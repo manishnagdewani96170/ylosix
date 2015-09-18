@@ -11,6 +11,14 @@ class ProductsControllerTest < ActionController::TestCase
     object = products(:camera)
     get :show, slug: object.slug
     assert_response :success
+
+    get :show,id: !object.id.present?
+    # assert_raises(ActiveRecord::RecordNotFound)
+    assert_response :not_found
+
+    get :show,id: !object.slug.present?
+    # assert_raises(ActiveRecord::RecordNotFound)
+    assert_response :not_found
   end
 
   test 'should add to shopping cart' do

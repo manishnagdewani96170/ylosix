@@ -15,6 +15,12 @@ class CategoriesControllerTest < ActionController::TestCase
     get :show, id: object.id
     assert_response :success
 
+    
+    get :show,id: !object.id.present?
+    assert_response :not_found
+
+    get :show,id: !object.slug.present?
+    assert_response :not_found
     # TODO: check when id nil return 404 not found
   end
 
